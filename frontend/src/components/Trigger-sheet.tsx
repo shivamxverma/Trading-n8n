@@ -1,5 +1,6 @@
-import React,{useState} from "react"
+import React, { useState } from "react"
 import { Button } from "@/components/ui/button"
+import { Input } from "./ui/input";
 import {
     Sheet,
     SheetClose,
@@ -20,19 +21,19 @@ import {
     SelectGroup,
 } from "@/components/ui/select";
 import { SelectLabel } from "@radix-ui/react-select";
-
-const SUPPORTED_TRIGGERS = [
-    { id: 'price-trigger', title: 'Price Trigger', description: 'Triggers when a specific price point is reached.' },
-    { id: 'timer-trigger', title: 'Timer Trigger', description: 'Triggers at specified time intervals.' },
-]
+import type { PriceMetadata } from "@/lib/types";
+import type { TimerMetadata } from "@/lib/types";
+import { SUPPORTED_TRIGGERS, SUPPORTED_ASSETS } from "../lib/types";
 
 
 export function TriggerSheet({
     onSelect
 }: {
-    onSelect: (payload: { kind: string; metadata: any }) => void
+    onSelect: (payload: { type: string; metadata: any }) => void
 }) {
-    const [metadata, setMetadata] = useState<any>({});
+    const [metadata, setMetadata] = useState<PriceMetadata | TimerMetadata>({
+        time: 3600,
+    });
     const [selectedTrigger, setSelectedTrigger] = useState(SUPPORTED_TRIGGERS[0].id);
 
     return (
@@ -51,25 +52,88 @@ export function TriggerSheet({
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
-                                    {SUPPORTED_TRIGGERS.map(({id,title}) => (
-                                    <>
-                                        <SelectItem
-                                            key = {id}
-                                            value={id}
-                                        >
-                                            {title}
-                                        </SelectItem>
-                                    </>
-                                ))}
+                                    {SUPPORTED_TRIGGERS.map(({ id, title }) => (
+                                        <>
+                                            <SelectItem
+                                                key={id}
+                                                value={id}
+                                            >
+                                                {title}
+                                            </SelectItem>
+                                        </>
+                                    ))}
                                 </SelectGroup>
                             </SelectContent>
+
+                            {selectedTrigger === 'price-trigger' && (
+                                <>
+                                    <SelectGroup>
+                                        <SelectLabel className="mt-4 mb-2">Asset</SelectLabel>
+                                        <Select value={(metadata as PriceMetadata).asset} onValueChange={(value) => {
+                                            setMetadata({
+                                                ...(metadata as PriceMetadata),
+                                                asset: value,
+                                            })
+                                        }}>
+                                            <SelectTrigger className="w-full">
+                                                <SelectValue placeholder="Select Asset" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectGroup>
+                                                    {SUPPORTED_ASSETS.map(({ id, title }) => (
+                                                        <SelectItem
+                                                            key={id}
+                                                            value={id}
+                                                        >
+                                                            {title}
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectGroup>
+                                            </SelectContent>
+                                        </Select>
+                                    </SelectGroup>
+
+                                    <SelectGroup>
+                                        <Input
+                                            className="mt-4"
+                                            type="number"
+                                            placeholder="Price"
+                                            value={(metadata as PriceMetadata).price}
+                                            onChange={(e) => {
+                                                setMetadata({
+                                                    ...(metadata as PriceMetadata),
+                                                    price: Number(e.target.value),
+                                                })
+                                            }
+                                            }
+                                        />
+                                    </SelectGroup>
+
+                                    <SelectGroup>
+                                        <Input
+                                            className="mt-4"
+                                            type="number"
+                                            placeholder="Decimals"
+                                            value={(metadata as PriceMetadata).decimals}
+                                            onChange={(e) => {
+                                                setMetadata({
+                                                    ...(metadata as PriceMetadata),
+                                                    decimals: Number(e.target.value),
+                                                })
+                                            }
+                                            }
+                                        />
+                                    </SelectGroup>
+                                </>
+                            )}
+
                         </Select>
                     </SheetDescription>
                 </SheetHeader>
                 <SheetFooter>
                     <Button onClick={() => {
                         onSelect({
-                            kind: selectedTrigger,
+                            type: selectedTrigger,
                             metadata,
                         })
                     }}>Save changes</Button>
