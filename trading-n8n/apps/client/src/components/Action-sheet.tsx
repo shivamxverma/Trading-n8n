@@ -20,9 +20,9 @@ import {
     SelectValue,
     SelectGroup,
 } from "@/components/ui/select";
-import { SUPPORTED_ASSETS } from "../lib/types";
-import type { TradingMetadata } from "@/lib/types";
-import { SUPPORTED_ACTIONS } from "../lib/types";
+import { SUPPORTED_ASSETS } from "../../../../packages/common/metadata";
+import type { TradingMetadata } from "../../../../packages/common/metadata";
+import { SUPPORTED_ACTIONS } from "../../../../packages/common/metadata";
 
 
 export function ActionSheet({

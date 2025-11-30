@@ -1,5 +1,5 @@
 import { Handle, Position } from "@xyflow/react";
-import type { TimerMetadata } from "@/lib/types";
+import type { TimerMetadata } from "../../../../../packages/common/metadata";
 
 const Timer = ({data,isConnectable} : {
     data : {

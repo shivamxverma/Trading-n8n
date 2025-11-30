@@ -8,7 +8,7 @@ import { ActionSheet } from './Action-sheet';
 import {Lighter} from '@/nodes/actions/Lighter';
 import { Hyperliquid } from '@/nodes/actions/Hyperliquid';
 import { Backpack } from '@/nodes/actions/BackPack';
-import type { NodeMetadata } from '@/lib/types';
+import type { NodeMetadata } from "../../../../packages/common/metadata";
 
 const nodeTypes = {
   "timer": Timer,

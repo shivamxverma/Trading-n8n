@@ -1,5 +1,5 @@
 import { Position,Handle } from "@xyflow/react";
-import type { TradingMetadataForActions } from "@/lib/types";
+import type { TradingMetadataForActions } from "../../../../../packages/common/metadata";
 
 export function Hyperliquid({data} : {
     data : {

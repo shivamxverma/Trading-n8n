@@ -21,9 +21,9 @@ import {
     SelectGroup,
 } from "@/components/ui/select";
 import { SelectLabel } from "@radix-ui/react-select";
-import type { PriceMetadata } from "@/lib/types";
-import type { TimerMetadata } from "@/lib/types";
-import { SUPPORTED_TRIGGERS, SUPPORTED_ASSETS } from "../lib/types";
+import type { PriceMetadata } from "../../../../packages/common/metadata";
+import type { TimerMetadata } from "../../../../packages/common/metadata";
+import { SUPPORTED_TRIGGERS, SUPPORTED_ASSETS } from "../../../../packages/common/metadata";
 
 
 export function TriggerSheet({

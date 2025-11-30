@@ -1,11 +1,11 @@
-import { Position,Handle } from "@xyflow/react";
-import type { TradingMetadataForActions } from "@/lib/types"; 
+import { Position, Handle } from "@xyflow/react";
+import type { TradingMetadataForActions } from "../../../../../packages/common/metadata";
 
-export function Lighter({data} : {
-    data : {
-        metadata : TradingMetadataForActions
+export function Backpack({ data }: {
+    data: {
+        metadata: TradingMetadataForActions
     }
-}){
+}) {
     return (
         <div style={{
             display: 'flex',

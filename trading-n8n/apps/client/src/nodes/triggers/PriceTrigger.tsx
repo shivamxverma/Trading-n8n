@@ -1,5 +1,5 @@
 import { Handle, Position } from "@xyflow/react";
-import type { PriceMetadata } from "@/lib/types";
+import type { PriceMetadata } from "../../../../../packages/common/src";
 
 
 const PriceTrigger = ({data,isConnectable} : {
