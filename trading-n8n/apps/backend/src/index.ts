@@ -1,6 +1,12 @@
 import express from 'express';
+import mongoose from 'mongoose';
+import {UserModel} from 'db/client';
+import dotenv from 'dotenv';
+dotenv.config({});
+mongoose.connect(process.env.MONGO_URL!);
 
 const app = express();
+
 
 app.post("/signup",(req,res) => {
 
